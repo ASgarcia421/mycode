@@ -1,0 +1,28 @@
+#!/usr/bash/env python3
+
+import random
+
+def get_weather_description(gesture):
+    weather_conditions = {
+        "sunny": "It's a sunny day!",
+        "cloudy": "Clouds are covering the sky.",
+        "rainy": "Expect some rain today.",
+        "stormy": "A storm is brewing.",
+        "snowy": "Get ready for some snowfall."
+    }
+
+    return weather_conditions.get(gesture, "Unable to determine the weather.")
+
+def main():
+    # Simulating hand gesture input (replace this with actual gesture recognition)
+    hand_gesture = input("Enter a hand gesture (sunny, cloudy, rainy, stormy, snowy): ").lower()
+
+    # Get the weather description based on the hand gesture
+    weather_description = get_weather_description(hand_gesture)
+
+    # Display the weather description
+    print(weather_description)
+
+if __name__ == "__main__":
+    main()
+
