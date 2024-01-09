@@ -1,0 +1,27 @@
+import secrets
+import string
+
+PASSWORD_LENGTH = 16
+NUM_PASSWORDS = 5  # Change this to the desired number of passwords
+PASSWORD_FILE = "passwords.txt"
+
+def generate_password(length=PASSWORD_LENGTH):
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(secrets.choice(characters) for _ in range(length))
+    return password
+
+def save_passwords_to_file(passwords, file_path=PASSWORD_FILE):
+    with open(file_path, "w") as file:
+        for password in passwords:
+            file.write(f"{password}\n")
+
+if __name__ == "__main__":
+    generated_passwords = [generate_password() for _ in range(NUM_PASSWORDS)]
+
+    print("Generated Passwords:")
+    for password in generated_passwords:
+        print(password)
+
+    save_passwords_to_file(generated_passwords)
+    print(f"Passwords saved to {PASSWORD_FILE}")
+

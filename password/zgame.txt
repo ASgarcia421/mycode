@@ -1,0 +1,68 @@
+import time
+import random
+import tkinter as tk
+from tkinter import messagebox
+
+class ZeldaGameGUI:
+    def __init__(self):
+        self.root = tk.Tk()
+        self.root.title("Zelda-Inspired Text Adventure")
+
+        self.wisdom = 0
+        self.strength = 0
+
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.label_intro = tk.Label(self.root, text="Welcome to the Legend of Zelda-inspired Text Adventure!")
+        self.label_intro.pack()
+
+        self.label_stats = tk.Label(self.root, text="Current stats: Wisdom 0, Strength 0")
+        self.label_stats.pack()
+
+        self.button_left = tk.Button(self.root, text="Go left into the dark forest", command=self.choose_left)
+        self.button_left.pack()
+
+        self.button_right = tk.Button(self.root, text="Head right towards the mountains", command=self.choose_right)
+        self.button_right.pack()
+
+        self.button_quit = tk.Button(self.root, text="Quit", command=self.quit_game)
+        self.button_quit.pack()
+
+    def print_slow(self, text, delay=0.03):
+        for char in text:
+            self.root.update()
+            self.label_intro.config(text=self.label_intro.cget("text") + char)
+            time.sleep(delay)
+
+    def choose_left(self):
+        self.print_slow("You enter the dark forest.")
+        self.print_slow("After a short walk, you encounter a mysterious creature.")
+        self.print_slow("It's a friendly fairy! She offers to guide you.")
+        self.print_slow("You gain +10 wisdom.")
+        self.wisdom += 10
+        self.update_stats()
+
+    def choose_right(self):
+        self.print_slow("You climb the steep mountains.")
+        self.print_slow("Halfway up, you encounter a group of mountain goats.")
+        self.print_slow("You befriend them and they help you reach the summit.")
+        self.print_slow("You gain +10 strength.")
+        self.strength += 10
+        self.update_stats()
+
+    def update_stats(self):
+        self.label_stats.config(text=f"Current stats: Wisdom {self.wisdom}, Strength {self.strength}")
+
+    def quit_game(self):
+        response = messagebox.askyesno("Quit", "Are you sure you want to quit?")
+        if response:
+            self.root.destroy()
+
+    def run(self):
+        self.root.mainloop()
+
+if __name__ == "__main__":
+    game = ZeldaGameGUI()
+    game.run()
+
