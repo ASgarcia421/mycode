@@ -33,7 +33,7 @@ def display_weather(weather_data):
 
 if __name__ == "__main__":
     # '5204cd2b8c86ce186314c48ac35a09b'weatherstack API key
-    api_key = '5204cd2b8c86ce186314c48ac35a09b2'
+    api_key = 'insert key'
     city = 'Lacey'  # location
 
     weather_data = get_weather(api_key, city)
