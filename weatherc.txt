@@ -1,0 +1,43 @@
+#!/bin/bash/env python3
+
+import requests
+      # API weatherstack.com using apri key
+def get_weather(api_key, city):
+    base_url = "http://api.weatherstack.com/current"
+    params = {
+        'access_key': api_key,
+        'query': city
+    }
+
+    response = requests.get(base_url, params=params)
+
+    if response.status_code == 200:
+        weather_data = response.json()
+        return weather_data
+    else:
+        print(f"Error: Unable to fetch weather data. Status code: {response.status_code}")
+        return None
+
+def display_weather(weather_data):
+    if weather_data:
+        location = weather_data['location']
+        current = weather_data['current']
+        # weather, location,discription, temp, humidity, wind speed, using f
+        print(f"Weather in {location['name']}, {location['country']}:")
+        print(f"Description: {current['weather_descriptions'][0]}")
+        print(f"Temperature: {current['temperature']}°F")  # change temp C or F
+        print(f"Humidity: {current['humidity']}%")
+        print(f"Wind Speed: {current['wind_speed']} mph")
+    else:
+        print("Unable to display weather information.")
+
+if __name__ == "__main__":
+    # '5204cd2b8c86ce186314c48ac35a09b'weatherstack API key
+    api_key = '5204cd2b8c86ce186314c48ac35a09b2'
+    city = 'Lacey'  # location
+
+    weather_data = get_weather(api_key, city)
+
+    if weather_data:
+        display_weather(weather_data)
+
